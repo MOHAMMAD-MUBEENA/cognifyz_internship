@@ -1,0 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#myButton {
+    padding: 10px 20px;
+    background-color:hotpink;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
+}
