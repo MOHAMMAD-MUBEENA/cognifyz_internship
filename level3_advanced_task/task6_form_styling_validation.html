@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Form Styling and Validation</title>
+    <link rel="stylesheet" href=".//task6_stylesheet.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Registration Form</h1>
+        <form id="registrationForm" novalidate>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <span class="error" id="nameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span class="error" id="emailError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required minlength="6">
+                <span class="error" id="passwordError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <span class="error" id="confirmPasswordError"></span>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let isValid = true;
+
+    // Name validation
+    const name = document.getElementById('name').value.trim();
+    const nameError = document.getElementById('nameError');
+    if (name === '') {
+        nameError.textContent = 'Name is required.';
+        isValid = false;
+    } else {
+        nameError.textContent = '';
+    }
+
+    // Email validation
+    const email = document.getElementById('email').value.trim();
+    const emailError = document.getElementById('emailError');
+    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    if (!emailRegex.test(email)) {
+        emailError.textContent = 'Please enter a valid email.';
+        isValid = false;
+    } else {
+        emailError.textContent = '';
+    }
+
+    // Password validation
+    const password = document.getElementById('password').value;
+    const passwordError = document.getElementById('passwordError');
+    if (password.length < 6) {
+        passwordError.textContent = 'Password must be at least 6 characters.';
+        isValid = false;
+    } else {
+        passwordError.textContent = '';
+    }
+
+    // Confirm password validation
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const confirmPasswordError = document.getElementById('confirmPasswordError');
+    if (confirmPassword !== password) {
+        confirmPasswordError.textContent = 'Passwords do not match.';
+        isValid = false;
+    } else {
+        confirmPasswordError.textContent = '';
+    }
+
+    if (isValid) {
+        alert('Form submitted successfully!');
+        document.getElementById('registrationForm').reset();
+    }
+});
+
+    </script>
+</body>
+</html>
